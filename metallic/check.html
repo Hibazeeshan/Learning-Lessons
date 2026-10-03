@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قبل التعلم وبعده</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--teal:#5cc6bd;--teal-soft:#e6f7f5;--navy:#1d5b79;--ink:#16323f;--red:#c0262d;--gold:#e0a43a;
+    --ok:#2f9c68;--ok-bg:#e5f6ed;--bad:#d8564f;--bad-bg:#fbe8e7;--card:#fff;--line:rgba(22,50,63,.13)}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Tajawal',sans-serif;background:var(--teal-soft);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .opt,.chip,.bin,.mi,.tabs button,.btn{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  header{background:var(--navy);color:#fff;padding:22px 18px 26px}
+  .wrap{max-width:860px;margin:0 auto}
+  .eyebrow{font-size:13.5px;opacity:.85}
+  h1{margin:6px 0 6px;font-size:clamp(24px,5vw,34px);font-weight:800}
+  .sub{margin:0;font-size:15.5px;opacity:.92;line-height:1.7}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .chips span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:9px;padding:5px 11px;font-size:13px}
+  .fields{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .fields input{flex:1;min-width:150px;border:none;border-radius:10px;padding:11px 13px;font-family:inherit;font-size:15px}
+  .sticky{position:sticky;top:0;z-index:5;background:var(--teal-soft);padding:12px 16px;border-bottom:1px solid var(--line)}
+  .bar{height:9px;background:var(--line);border-radius:99px;overflow:hidden}
+  .fill{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--ok));transition:width .3s}
+  .stat{display:flex;justify-content:space-between;font-size:14px;margin-top:6px;color:#3f5b66;font-weight:500}
+  main{padding:8px 16px 60px}
+  .tabs{display:flex;gap:8px;margin:18px 0 4px}
+  .tabs button{flex:1;border:2px solid var(--navy);background:#fff;color:var(--navy);border-radius:12px;padding:12px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer}
+  .tabs button.on{background:var(--navy);color:#fff}
+  section{margin-top:30px}
+  .sh{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .num{background:var(--navy);color:#fff;border-radius:9px;padding:3px 10px;font-weight:800;font-size:14px}
+  h2{margin:0;font-size:21px;font-weight:800}
+  .tag{font-size:12.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:8px;padding:3px 9px}
+  .tag.hot{background:var(--red)}
+  .desc{color:#4f6a75;font-size:15px;margin:8px 0 14px;line-height:1.7}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px;margin-bottom:14px;box-shadow:0 2px 10px rgba(20,60,70,.05)}
+  .q{font-weight:700;font-size:16.5px;line-height:1.75;margin-bottom:12px}
+  .opts{display:grid;gap:9px}
+  .opt{border:1.6px solid var(--line);border-radius:11px;padding:12px 13px;cursor:pointer;font-size:15.5px;display:flex;gap:10px;align-items:center;background:#fff;line-height:1.6}
+  .opt b{width:26px;height:26px;flex-shrink:0;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px}
+  .opt.ok{border-color:var(--ok);background:var(--ok-bg)} .opt.ok b{background:var(--ok);border-color:var(--ok);color:#fff}
+  .opt.no{border-color:var(--bad);background:var(--bad-bg)} .opt.no b{background:var(--bad);border-color:var(--bad);color:#fff}
+  .locked .opt{pointer-events:none}
+  .fb{display:none;margin-top:10px;border-radius:10px;padding:10px 12px;font-size:14.5px;line-height:1.7}
+  .fb.show{display:block} .fb.ok{background:var(--ok-bg);color:#1f6e49} .fb.no{background:var(--bad-bg);color:#9b2f29}
+  /* sort */
+  .pool{display:flex;flex-wrap:wrap;gap:8px;min-height:44px;margin-bottom:14px}
+  .chip{background:#fff;border:1.6px dashed var(--navy);border-radius:10px;padding:9px 12px;font-size:15px;cursor:pointer;line-height:1.5}
+  .chip.sel{background:var(--navy);color:#fff;border-style:solid}
+  .bins{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:560px){.bins{grid-template-columns:1fr}}
+  .bin{border:2px solid var(--teal);border-radius:14px;padding:10px;min-height:120px;cursor:pointer;background:#f8fdfc}
+  .bin h3{margin:0 0 8px;font-size:16px;text-align:center;color:var(--navy)}
+  .bin .placed{display:block;background:var(--ok-bg);border:1.4px solid var(--ok);border-radius:9px;padding:7px 10px;margin:6px 0;font-size:14.5px}
+  .bin.flash{animation:fl .45s} @keyframes fl{30%{background:var(--bad-bg);border-color:var(--bad)}}
+  /* match */
+  .mgrid{display:grid;grid-template-columns:1fr 1.3fr;gap:12px}
+  @media(max-width:560px){.mgrid{grid-template-columns:1fr}}
+  .mi{border:1.6px solid var(--line);border-radius:11px;padding:11px 12px;margin-bottom:9px;cursor:pointer;background:#fff;font-size:15px;line-height:1.6}
+  .mi.sel{border-color:var(--navy);background:#e8f1f6}
+  .mi.done{border-color:var(--ok);background:var(--ok-bg);cursor:default}
+  .mi.shake{animation:sh .35s;border-color:var(--bad)} @keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .mtitle{font-size:13px;font-weight:700;color:#6b8590;margin-bottom:8px}
+  textarea{width:100%;min-height:80px;border:1.6px solid var(--line);border-radius:11px;padding:11px;font-family:inherit;font-size:15.5px}
+  .btn{border:2px solid var(--navy);background:#fff;color:var(--navy);border-radius:10px;padding:8px 15px;font-family:inherit;font-weight:700;font-size:14.5px;cursor:pointer;margin-top:9px}
+  .btn.main{background:var(--red);border-color:var(--red);color:#fff;font-size:17px;padding:13px 26px}
+  .model{display:none;margin-top:10px;background:var(--teal-soft);border-radius:10px;padding:11px 13px;font-size:15px;line-height:1.75}
+  .model.show{display:block}
+  .emojis{display:flex;gap:10px;flex-wrap:wrap}
+  .emojis .opt{flex:1;justify-content:center;font-size:16px;min-width:120px}
+  .result{display:none;text-align:center;background:var(--navy);color:#fff;border-radius:18px;padding:22px 16px;margin-top:22px}
+  .result.show{display:block}
+  .result .big{font-size:44px;font-weight:800;margin:6px 0}
+  .center{text-align:center;margin-top:28px}
+  footer{text-align:center;color:#5d7882;font-size:13px;padding:10px 16px 40px;line-height:1.8}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="eyebrow">التقويم القبلي وبطاقة الخروج · الكيمياء (2) · الدرس 3-4</div>
+  <h1>قبل التعلم وبعده</h1>
+  <p class="sub">التبويب الأول في بداية الحصة، والتبويب الثاني في نهايتها.</p>
+  <div class="chips"><span>📗 الروابط الفلزية وخواص الفلزات</span><span>⏱️ 3 دقائق لكل جزء</span></div>
+  <div class="fields"><input id="nm" placeholder="الاسم"></div>
+</div></header>
+<div class="sticky"><div class="wrap">
+  <div class="bar"><div class="fill" id="fill"></div></div>
+  <div class="stat"><span id="prog">0 / 0</span><span id="score">النقاط: 0</span></div>
+</div></div>
+<main><div class="wrap" id="root"></div></main>
+<footer>© أكاديمية فوزية · fawziaacademy.com<br>الكيمياء (2) · الفصل الثالث · الدرس 3-4: الروابط الفلزية وخواص الفلزات</footer>
+<script>
+const DATA = {"parts": [{"tab": "قبل التعلم", "intro": "تقويم قبلي سريع: لا بأس بالخطأ هنا! الهدف معرفة ما نعرفه قبل الدرس.", "finish": "عرض النتيجة", "sections": [{"type": "mcq", "title": "ماذا أعرف؟", "tags": [{"t": "تقويم قبلي"}], "items": [{"q": "عندما تكوّن ذرة الصوديوم Na أيونًا فإنها:", "o": ["تفقد إلكترونًا", "تكتسب إلكترونًا", "تفقد بروتونًا", "تكتسب بروتونًا"], "a": 0, "e": "تفقد ذرة الفلز إلكترونات تكافؤها فتتحول إلى أيون موجب Na⁺."}, {"q": "الرابطة الأيونية تنشأ عن التجاذب بين:", "o": ["ذرتين متماثلتين", "أيون موجب وأيون سالب", "إلكترونين", "بروتون ونيوترون"], "a": 1, "e": "الرابطة الأيونية قوة تجاذب كهروستاتيكية بين أيونات مختلفة الشحنة."}, {"q": "تُصنع أسلاك الكهرباء في المنازل من النحاس لأنه:", "o": ["رخيص فقط", "موصل جيد للكهرباء", "لا يتأثر بالحرارة", "أخف من البلاستيك"], "a": 1, "e": "صحيح، النحاس موصل جيد… وسنكتشف اليوم السبب العلمي لذلك!"}, {"q": "الفلزات تتحطم عند طرقها بالمطرقة مثل بلورات ملح الطعام.", "o": ["صح", "خطأ"], "a": 1, "e": "خطأ؛ الفلزات تتشكل ولا تتحطم. ما السبب؟ هذا ما سيجيب عنه درس اليوم."}]}]}, {"tab": "بطاقة الخروج", "intro": "بطاقة الخروج: ثلاث دقائق للتأكد من تحقق أهداف الدرس.", "finish": "إرسال بطاقة الخروج", "sections": [{"type": "mcq", "title": "ماذا تعلمت؟", "tags": [{"t": "تقويم ختامي"}], "items": [{"q": "تنشأ الرابطة الفلزية عن التجاذب بين:", "o": ["أيون موجب وأيون سالب", "أيونات الفلز الموجبة والإلكترونات الحرة", "ذرتي لا فلز", "فلز ولا فلز"], "a": 1, "e": "الرابطة الفلزية: قوة التجاذب بين الأيونات الموجبة للفلزات والإلكترونات الحرة في الشبكة الفلزية."}, {"q": "الفلزات قابلة للطرق والسحب لأن:", "o": ["أيوناتها الموجبة تنزلق عبر بحر الإلكترونات دون أن تنفصل", "إلكتروناتها مرتبطة بذرات محددة", "أيوناتها السالبة تتنافر", "درجة انصهارها منخفضة"], "a": 0, "e": "بحر الإلكترونات يبقى محيطًا بالأيونات الموجبة ويربطها أينما انزلقت."}, {"tag": "تطبيق", "hot": true, "q": "أي مما يأتي سبيكة؟", "o": ["الحديد النقي", "الفولاذ المقاوم للصدأ", "كلوريد الصوديوم", "الكروم"], "a": 1, "e": "الفولاذ المقاوم للصدأ خليط من الحديد والكروم والنيكل، أي أنه سبيكة."}]}, {"type": "rate", "title": "مدى فهمي للدرس", "q": "مدى فهمي لدرس اليوم:", "o": ["😀 فهمته جيدًا", "🙂 فهمت معظمه", "😐 أحتاج إلى مساعدة"]}]}]};
+const L=['أ','ب','ج','د'];
+let parts=[], cur=0;
+function shuffle(a){return a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);}
+function el(t,c,h){const e=document.createElement(t); if(c)e.className=c; if(h!==undefined)e.innerHTML=h; return e;}
+const state={total:0,done:0,score:0,auto:0};
+function upd(){ const p=DATA.parts[cur]; const s=p.st;
+  document.getElementById('fill').style.width=(s.total?Math.round(s.done/s.total*100):0)+'%';
+  document.getElementById('prog').innerHTML='<bdi dir="ltr">'+s.done+' / '+s.total+'</bdi>';
+  document.getElementById('score').innerHTML='النقاط: <bdi dir="ltr">'+s.score+' / '+s.auto+'</bdi>'; }
+function hit(p,ok,auto=true){ p.st.done++; if(ok&&auto)p.st.score++; upd(); }
+function head(sec,i){ const h=el('div','sh');
+  h.appendChild(el('span','num',String(i+1).padStart(2,'0'))); h.appendChild(el('h2','',sec.title));
+  (sec.tags||[]).forEach(t=>h.appendChild(el('span','tag'+(t.hot?' hot':''),t.t))); return h; }
+function mcq(p,sec,box){
+  sec.items.forEach((it,qi)=>{ const c=el('div','card');
+    if(it.tag) c.appendChild(el('span','tag'+(it.hot?' hot':''),it.tag));
+    c.appendChild(el('div','q',(qi+1)+'. '+it.q));
+    const o=el('div','opts'); const fb=el('div','fb');
+    it.o.forEach((t,i)=>{ const b=el('div','opt','<b>'+L[i]+'</b><span>'+t+'</span>');
+      b.onclick=()=>{ if(o.classList.contains('locked'))return; o.classList.add('locked');
+        const ok=i===it.a; b.classList.add(ok?'ok':'no'); if(!ok)o.children[it.a].classList.add('ok');
+        fb.className='fb show '+(ok?'ok':'no'); fb.innerHTML=(ok?'✔️ إجابة صحيحة. ':'✖️ الإجابة الصحيحة: '+L[it.a]+'. ')+(it.e||''); hit(p,ok); };
+      o.appendChild(b); });
+    c.appendChild(o); c.appendChild(fb); box.appendChild(c); p.st.total++; p.st.auto++; });
+}
+function sort(p,sec,box){
+  const c=el('div','card'); const pool=el('div','pool'); let sel=null;
+  shuffle(sec.items).forEach(it=>{ const ch=el('div','chip',it.t); ch.dataset.b=it.b;
+    ch.onclick=()=>{ if(sel)sel.classList.remove('sel'); sel=(sel===ch)?null:ch; if(sel)ch.classList.add('sel'); }; pool.appendChild(ch);
+    p.st.total++; p.st.auto++; });
+  const bins=el('div','bins');
+  sec.bins.forEach((bn,bi)=>{ const b=el('div','bin','<h3>'+bn+'</h3>');
+    b.onclick=()=>{ if(!sel)return; const ok=String(bi)===sel.dataset.b;
+      if(ok){ const miss=!!sel.__miss; b.appendChild(el('span','placed',sel.innerHTML)); sel.remove(); sel=null; hit(p,!miss); }
+      else { b.classList.remove('flash'); void b.offsetWidth; b.classList.add('flash'); sel.__miss=true; } };
+    bins.appendChild(b); });
+  c.appendChild(el('div','mtitle','البطاقات')); c.appendChild(pool); c.appendChild(bins); box.appendChild(c);
+}
+function match(p,sec,box){
+  const c=el('div','card'); const g=el('div','mgrid'); const A=el('div'),B=el('div'); let sel=null;
+  A.appendChild(el('div','mtitle',sec.left)); B.appendChild(el('div','mtitle',sec.right));
+  const mk=(txt,id,side)=>{ const m=el('div','mi',txt); m.dataset.id=id; m.dataset.s=side;
+    m.onclick=()=>{ if(m.classList.contains('done'))return;
+      if(!sel||sel.dataset.s===side){ if(sel)sel.classList.remove('sel'); sel=m; m.classList.add('sel'); return; }
+      if(sel.dataset.id===String(id)){ [sel,m].forEach(x=>{x.classList.remove('sel');x.classList.add('done')}); hit(p,!(sel.__miss||m.__miss)); sel=null; }
+      else { const s0=sel; [s0,m].forEach(x=>{x.classList.add('shake');x.__miss=true}); setTimeout(()=>{[s0,m].forEach(x=>x.classList.remove('shake','sel'))},380); sel=null; } };
+    return m; };
+  sec.items.forEach((it,i)=>{ A.appendChild(mk(it.l,i,'l')); p.st.total++; p.st.auto++; });
+  shuffle(sec.items.map((it,i)=>[it,i])).forEach(([it,i])=>B.appendChild(mk(it.r,i,'r')));
+  g.appendChild(A); g.appendChild(B); c.appendChild(g); box.appendChild(c);
+}
+function explain(p,sec,box){
+  sec.items.forEach((it,qi)=>{ const c=el('div','card');
+    if(it.tag) c.appendChild(el('span','tag'+(it.hot?' hot':''),it.tag));
+    c.appendChild(el('div','q',(qi+1)+'. '+it.q));
+    const ta=el('textarea'); ta.placeholder='الإجابة...'; let t=false; ta.oninput=()=>{ if(!t&&ta.value.trim().length>5){t=true;hit(p,true,false);} };
+    const m=el('div','model','<b>إجابة نموذجية:</b> '+it.a); const b=el('button','btn','عرض الإجابة النموذجية'); b.onclick=()=>m.classList.toggle('show');
+    c.appendChild(ta); c.appendChild(b); c.appendChild(m); box.appendChild(c); p.st.total++; });
+}
+function rate(p,sec,box){
+  const c=el('div','card'); c.appendChild(el('div','q',sec.q)); const o=el('div','emojis');
+  sec.o.forEach(t=>{ const b=el('div','opt',t); b.onclick=()=>{ if(o.dataset.d)return; o.dataset.d=1; b.classList.add('ok'); hit(p,true,false); }; o.appendChild(b); });
+  c.appendChild(o); box.appendChild(c); p.st.total++;
+}
+const R={mcq,sort,match,explain,rate};
+function build(){
+  const root=document.getElementById('root');
+  if(DATA.parts.length>1){ const tb=el('div','tabs');
+    DATA.parts.forEach((pt,i)=>{ const b=el('button',i?'':'on',pt.tab); b.onclick=()=>show(i); tb.appendChild(b); }); root.appendChild(tb); }
+  DATA.parts.forEach((pt,pi)=>{ pt.st={total:0,done:0,score:0,auto:0}; const box=el('div',pi?'hidden':''); pt.box=box;
+    if(pt.intro) box.appendChild(el('p','desc',pt.intro));
+    pt.sections.forEach((sec,i)=>{ const s=el('section'); s.appendChild(head(sec,i)); if(sec.desc)s.appendChild(el('p','desc',sec.desc)); R[sec.type](pt,sec,s); box.appendChild(s); });
+    const cen=el('div','center'); const fin=el('button','btn main',pt.finish||'إنهاء وعرض النتيجة'); const res=el('div','result');
+    fin.onclick=()=>{ const s=pt.st; const pct=s.auto?Math.round(s.score/s.auto*100):0;
+      res.innerHTML='<div>'+(document.getElementById('nm')&&document.getElementById('nm').value?document.getElementById('nm').value+' — ':'')+'النتيجة</div><div class="big" dir="ltr">'+s.score+' / '+s.auto+'</div><div>'+(pct>=85?'🏆 أداء ممتاز!':pct>=60?'👏 أداء جيد، راجع/ي الأسئلة الخاطئة':'💪 تحتاج/ين إلى مراجعة الدرس')+(timerTxt()?'<br>⏱️ الزمن: '+timerTxt():'')+'</div>';
+      res.classList.add('show'); stopT(); res.scrollIntoView({behavior:'smooth',block:'center'}); };
+    cen.appendChild(fin); box.appendChild(cen); box.appendChild(res); root.appendChild(box); });
+  upd();
+}
+function show(i){ cur=i; DATA.parts.forEach((p,k)=>p.box.classList.toggle('hidden',k!==i)); document.querySelectorAll('.tabs button').forEach((b,k)=>b.classList.toggle('on',k===i)); upd(); window.scrollTo({top:0}); }
+let t0=null,tI=null,tEnd=null;
+function timerTxt(){ if(!t0)return ''; const s=Math.round(((tEnd||Date.now())-t0)/1000); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+function startT(){ if(t0||!document.getElementById('tm'))return; t0=Date.now(); tI=setInterval(()=>{document.getElementById('tm').textContent='⏱️ '+timerTxt()},1000); }
+function stopT(){ if(tI){clearInterval(tI);tI=null;tEnd=Date.now();} }
+document.addEventListener('click',startT,{once:true});
+build();
+</script>
+</body>
+</html>

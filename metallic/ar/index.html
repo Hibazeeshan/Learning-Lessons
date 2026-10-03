@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الواقع المعزز | بحر الإلكترونات</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script type="module" src="../js/model-viewer.min.js"></script>
+<style>
+  :root{
+    --teal:#5cc6bd; --teal-soft:#e3f6f4; --navy:#1d5b79; --ink:#16323f;
+    --red:#c0262d; --blue:#2f6fe4; --card:#ffffff; --line:rgba(22,50,63,.12);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Tajawal',sans-serif;background:var(--teal-soft);color:var(--ink);-webkit-font-smoothing:antialiased}
+  header{background:var(--navy);color:#fff;padding:18px 18px 22px;text-align:center}
+  header .eyebrow{font-size:13px;opacity:.8}
+  header h1{margin:6px 0 4px;font-size:clamp(22px,5vw,32px);font-weight:800}
+  header p{margin:0;font-size:15px;opacity:.9}
+  main{max-width:860px;margin:0 auto;padding:16px}
+  .viewer-card{background:var(--card);border-radius:20px;box-shadow:0 6px 20px rgba(20,60,70,.12);overflow:hidden}
+  model-viewer{width:100%;height:min(62vh,520px);background:radial-gradient(circle at 50% 40%,#ffffff 0%,#dff3f1 100%);--poster-color:transparent}
+  .ar-btn{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;border:none;
+    border-radius:999px;padding:12px 22px;font-family:inherit;font-size:16px;font-weight:700;box-shadow:0 6px 16px rgba(192,38,45,.35);cursor:pointer;white-space:nowrap}
+  .controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:14px}
+  .controls button{border:2px solid var(--navy);background:#fff;color:var(--navy);border-radius:12px;padding:10px 16px;
+    font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  .controls button.active{background:var(--navy);color:#fff}
+  .legend{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;padding:0 14px 16px;font-size:15px}
+  .dot{display:inline-block;width:16px;height:16px;border-radius:50%;vertical-align:middle;margin-inline-end:6px}
+  .status{text-align:center;font-size:14px;color:#4f6a75;padding:0 14px 14px;min-height:20px}
+  h2{font-size:20px;margin:26px 4px 12px;color:var(--navy)}
+  .task{background:var(--card);border-radius:16px;padding:16px 18px;margin-bottom:12px;border:1px solid var(--line)}
+  .tag{display:inline-block;font-size:12.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:8px;padding:3px 10px;margin-bottom:8px}
+  .tag.hot{background:var(--red)}
+  .task p{margin:0 0 10px;font-size:16px;line-height:1.7;font-weight:500}
+  textarea{width:100%;min-height:64px;border:1.5px solid var(--line);border-radius:10px;padding:10px;font-family:inherit;font-size:15px}
+  .reveal{margin-top:8px;background:none;border:1.5px solid var(--navy);color:var(--navy);border-radius:9px;padding:7px 14px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer}
+  .answer{display:none;margin-top:10px;background:var(--teal-soft);border-radius:10px;padding:10px 12px;font-size:15px;line-height:1.7}
+  .answer.show{display:block}
+  .tip{background:#fff7e6;border:1px solid #f3d9a4;border-radius:12px;padding:12px 14px;font-size:14.5px;line-height:1.7;margin-top:14px}
+  footer{text-align:center;color:#5d7882;font-size:13px;padding:26px 16px 40px}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">الكيمياء (2) · الفصل الثالث · الدرس 3-4</div>
+  <h1>بحر الإلكترونات بالواقع المعزز</h1>
+  <p>الرابطة الفلزية ثلاثية الأبعاد… على طاولة الفصل</p>
+</header>
+
+<main>
+  <div class="viewer-card">
+    <model-viewer id="mv" src="metal-lattice.glb" alt="نموذج بحر الإلكترونات: أيونات فلز موجبة تحيط بها إلكترونات حرة الحركة"
+      ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" camera-controls touch-action="pan-y"
+      auto-rotate rotation-per-second="12deg" animation-name="electrons" autoplay shadow-intensity="0.8"
+      camera-orbit="35deg 70deg auto" exposure="1.05">
+      <button slot="ar-button" class="ar-btn">📱 عرض النموذج على الطاولة (AR)</button>
+    </model-viewer>
+    <div class="controls">
+      <button id="b-e" class="active" onclick="play('electrons')">⚡ حركة الإلكترونات</button>
+      <button id="b-h" onclick="play('hammer')">🔨 طَرْق الفلز</button>
+    </div>
+    <div class="status" id="status">يمكن تدوير النموذج بالإصبع، وتكبيره بإصبعين.</div>
+    <div class="legend">
+      <span><span class="dot" style="background:#d9332e"></span>أيونات الفلز الموجبة</span>
+      <span><span class="dot" style="background:var(--blue)"></span>الإلكترونات الحرة (بحر الإلكترونات)</span>
+    </div>
+  </div>
+
+  <h2>مهام الاستكشاف</h2>
+
+  <div class="task">
+    <span class="tag">ملاحظة</span>
+    <p>١. ما الذي يحيط بالأيونات الموجبة في النموذج؟ وهل ترتبط الإلكترونات الزرقاء بأيون معيّن؟</p>
+    <textarea placeholder="الملاحظة..."></textarea>
+    <button class="reveal" onclick="rev(this)">عرض الإجابة</button>
+    <div class="answer">تحيط بالأيونات الموجبة إلكترونات حرة الحركة (بحر من الإلكترونات)، ولا ترتبط بأي أيون محدد، بل تنتقل بحرية عبر الشبكة الفلزية.</div>
+  </div>
+
+  <div class="task">
+    <span class="tag hot">تحليل · مهارة تفكير عليا</span>
+    <p>٢. بعد الضغط على «طَرْق الفلز»: ماذا حدث لطبقة الأيونات العليا؟ ولماذا لم ينكسر الفلز؟</p>
+    <textarea placeholder="التحليل..."></textarea>
+    <button class="reveal" onclick="rev(this)">عرض الإجابة</button>
+    <div class="answer">انزلقت الطبقة العليا فوق الطبقة التي تحتها دون أن ينكسر الفلز؛ لأن بحر الإلكترونات يبقى محيطًا بالأيونات الموجبة ويربطها بقوة أينما تحركت، فلا تتنافر الأيونات. لذلك تكون الفلزات قابلة للطرق والسحب.</div>
+  </div>
+
+  <div class="task">
+    <span class="tag hot">توقّع ومقارنة · مهارة تفكير عليا</span>
+    <p>٣. لو طرقنا بلورة ملح الطعام NaCl بالطريقة نفسها، هل ستنزلق طبقاتها مثل الفلز؟ (مع ذكر المبرر)</p>
+    <textarea placeholder="التوقع والمبرر..."></textarea>
+    <button class="reveal" onclick="rev(this)">عرض الإجابة</button>
+    <div class="answer">لا، بل تتحطم. في المركب الأيوني تترتب الأيونات الموجبة والسالبة بالتناوب، وعند انزلاق طبقة تتقابل أيونات متشابهة الشحنة فتتنافر وتنكسر البلورة. أما الفلز فلا يحدث فيه ذلك لوجود بحر الإلكترونات.</div>
+  </div>
+
+  <div class="tip">💡 <b>ملاحظة للمعلم/ة:</b> إن لم يدعم الجهاز الواقع المعزز، يظل النموذج ثلاثي الأبعاد يعمل على الشاشة، ويمكن عرضه من جهاز المعلم على جهاز العرض.</div>
+</main>
+
+<footer>أكاديمية فوزية · fawziaacademy.com</footer>
+
+<script>
+const mv=document.getElementById('mv');
+function play(name){
+  mv.animationName=name; mv.currentTime=0; mv.play();
+  document.getElementById('b-e').classList.toggle('active',name==='electrons');
+  document.getElementById('b-h').classList.toggle('active',name==='hammer');
+  document.getElementById('status').textContent = name==='hammer'
+    ? 'لاحظ: الطبقة العليا تنزلق… ويبقى بحر الإلكترونات يربط الأيونات.'
+    : 'الإلكترونات الحرة تتحرك بين الأيونات الموجبة في كل الاتجاهات.';
+}
+function rev(b){ b.nextElementSibling.classList.toggle('show'); }
+</script>
+</body>
+</html>
