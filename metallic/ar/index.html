@@ -61,6 +61,7 @@
       <button id="b-e" class="active" onclick="play('electrons')">⚡ حركة الإلكترونات</button>
       <button id="b-h" onclick="play('hammer')">🔨 طَرْق الفلز</button>
     </div>
+    <div class="tip" id="arnote" style="display:none;margin:0 14px 12px">📱 زر الواقع المعزز لا يظهر على هذا الجهاز أو المتصفح. للعرض على الطاولة: افتح الرابط في <b>Safari</b> على الآيباد/الآيفون، أو في <b>Chrome</b> على جوال أندرويد (وليس من داخل واتساب أو تيليجرام أو على الحاسوب). النموذج ثلاثي الأبعاد يعمل هنا بشكل طبيعي.</div>
     <div class="status" id="status">يمكن تدوير النموذج بالإصبع، وتكبيره بإصبعين.</div>
     <div class="legend">
       <span><span class="dot" style="background:#d9332e"></span>أيونات الفلز الموجبة</span>
@@ -110,6 +111,13 @@ function play(name){
     : 'الإلكترونات الحرة تتحرك بين الأيونات الموجبة في كل الاتجاهات.';
 }
 function rev(b){ b.nextElementSibling.classList.toggle('show'); }
+mv.addEventListener('load',()=>{
+  setTimeout(()=>{
+    if(!mv.canActivateAR){
+      const n=document.getElementById('arnote'); n.style.display='block';
+    }
+  },600);
+});
 </script>
 </body>
 </html>
