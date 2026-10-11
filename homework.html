@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تعزيز الدرس — واجب منزلي</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--teal:#30A99D;--teal-soft:#E3F6F4;--navy:#116483;--ink:#1A2433;--red:#0C5866;
+    --card:#fff;--line:rgba(22,50,63,.13)}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Tajawal',sans-serif;background:var(--teal-soft);color:var(--ink);-webkit-font-smoothing:antialiased}
+  header{background:var(--navy);color:#fff;padding:22px 18px 26px}
+  .wrap{max-width:860px;margin:0 auto}
+  .eyebrow{font-size:13.5px;opacity:.85}
+  h1{margin:6px 0 6px;font-size:clamp(24px,5vw,34px);font-weight:800}
+  .sub{margin:0;font-size:15.5px;opacity:.92;line-height:1.7}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .chips span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:9px;padding:5px 11px;font-size:13px}
+  main{padding:20px 16px 60px}
+  section{margin-top:26px}
+  .sh{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .num{background:var(--navy);color:#fff;border-radius:9px;padding:3px 10px;font-weight:800;font-size:14px}
+  h2{margin:0;font-size:19px;font-weight:800;color:var(--navy)}
+  .tag{font-size:12.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:8px;padding:3px 9px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px;margin-bottom:14px;box-shadow:0 2px 10px rgba(20,60,70,.05)}
+  .card p.reading{font-size:15px;line-height:1.85;color:#3f5b66;margin:8px 0 14px}
+  .q{font-weight:700;font-size:16px;line-height:1.75;margin-bottom:12px}
+  textarea{width:100%;min-height:80px;border:1.6px solid var(--line);border-radius:11px;padding:11px;font-family:inherit;font-size:15.5px}
+  .btn{border:2px solid var(--navy);background:#fff;color:var(--navy);border-radius:10px;padding:8px 15px;font-family:inherit;font-weight:700;font-size:14.5px;cursor:pointer;margin-top:9px}
+  .model{display:none;margin-top:10px;background:var(--teal-soft);border-radius:10px;padding:11px 13px;font-size:15px;line-height:1.75}
+  .model.show{display:block}
+  footer{text-align:center;color:#5d7882;font-size:13px;padding:10px 16px 40px;line-height:1.8}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="eyebrow">واجب منزلي / تعزيز · الكيمياء (1) · الدرس الثاني</div>
+  <h1>مواصلة الاستكشاف</h1>
+  <p class="sub">ثلاثة مواضيع تعزيزية تكمّل درس اليوم — اقرأ كل جزء ثم أجب عن سؤاله.</p>
+  <div class="chips"><span>📗 تعريف الذرة</span><span>🏠 واجب منزلي</span></div>
+</div></header>
+<main><div class="wrap" id="root">
+
+<section>
+  <div class="sh"><span class="num">01</span><h2>تجربة قطرة الزيت لميليكان (1910)</h2></div>
+  <div class="card">
+    <p class="reading">رشّ روبرت ميليكان قطرات صغيرة من الزيت بين صفيحتين مشحونتين، وضبط شدة المجال الكهربائي حتى توازنت كل قطرة في الهواء. وبقياس الشحنة على عدد كبير من القطرات، وجد أنها كانت دائمًا من مضاعفات عدد صحيح لقيمة واحدة: 1.602 × 10⁻¹⁹ كولوم — وهي شحنة الإلكترون المفرد.</p>
+    <p class="q">السؤال: لماذا كان من المهم أن تكون شحنة كل قطرة من مضاعفات نفس العدد؟</p>
+    <textarea placeholder="إجابتك..."></textarea>
+    <button class="btn" onclick="this.nextElementSibling.classList.toggle('show')">عرض الإجابة النموذجية</button>
+    <div class="model">كان ذلك دليلًا قويًا على أن الشحنة الكهربائية ليست مستمرة بل "مكمّاة" — أي أنها تأتي في وحدات منفصلة وثابتة، وأن هذه الوحدة هي شحنة الإلكترون المفرد، التي يمكن قياسها بدقة من هذه النتيجة.</div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="num">02</span><h2>التسلسل التاريخي لنموذج الذرة</h2></div>
+  <div class="card">
+    <p class="reading">من اكتشاف الإلكترون (1897)، إلى اكتشاف النيوترون (1932)، إلى دراسات سيرن الحديثة للجسيمات دون الذرية (2007 وما بعدها)، ظل نموذجنا للذرة يُعدَّل باستمرار كلما ظهرت أدلة تجريبية جديدة.</p>
+    <p class="q">السؤال: لماذا يُعدّ من الطبيعي في العلم أن يُستبدل نموذج (كنموذج طومسون) بنموذج أفضل، بدلًا من أن يكون ذلك دليلًا على فشل العلماء الأوائل؟</p>
+    <textarea placeholder="إجابتك..."></textarea>
+    <button class="btn" onclick="this.nextElementSibling.classList.toggle('show')">عرض الإجابة النموذجية</button>
+    <div class="model">العلم عملية تراكمية تعتمد على الأدلة: فكل نموذج يُقبل مؤقتًا لأنه يفسر الأدلة المتوفرة وقتها، وعندما تظهر أدلة جديدة لا يفسرها النموذج القديم، يُعدَّل النموذج أو يُستبدل. هذا لا يعني فشل العلماء الأوائل، بل يعني أن المعرفة العلمية تتطور وتتحسن باستمرار.</div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="num">03</span><h2>رؤية الذرات: الميكروسكوب الماسح النفقي (STM)</h2></div>
+  <div class="card">
+    <p class="reading">تُظهر صورة STM لسطح الجرافيت ذرات الكربون مرتبة في نمط سداسي متكرر، حيث تظهر كل ذرة كنقطة مضيئة تفصلها عن جاراتها مسافة ثابتة لا تتجاوز جزءًا من النانومتر.</p>
+    <p class="q">السؤال: ماذا تمثل النقاط المضيئة في صورة STM، ولماذا تكون متباعدة بمسافات متساوية؟</p>
+    <textarea placeholder="إجابتك..."></textarea>
+    <button class="btn" onclick="this.nextElementSibling.classList.toggle('show')">عرض الإجابة النموذجية</button>
+    <div class="model">تمثل كل نقطة مضيئة موضع ذرة كربون واحدة على سطح الجرافيت. وتتباعد النقاط بمسافات متساوية لأن ذرات الكربون مرتبة في بنية بلورية منتظمة ومتكررة، حيث تحتل كل ذرة موضعًا محددًا بدقة ضمن الشبكة البلورية.</div>
+  </div>
+</section>
+
+</div></main>
+<footer>© أكاديمية فوزية · fawzia-academy.vercel.app<br>الكيمياء (1) · الفصل الثالث · الدرس الثاني: تعريف الذرة</footer>
+</body>
+</html>
