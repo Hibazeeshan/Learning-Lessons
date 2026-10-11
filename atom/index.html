@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Defining the Atom — Activities</title>
+<style>
+  :root{
+    --navy:#116483; --navy-mid:#0C5866; --blue:#646B96;
+    --teal:#30A99D; --teal-light:#6CD0C6; --lightblue:#9FE0DA;
+    --bg:#F1F7F6; --text:#1A2433; --muted:#6E747A; --white:#FFFFFF;
+    --cream:#E3F6F4;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:'Segoe UI', Calibri, Arial, sans-serif; background:var(--bg); color:var(--text); line-height:1.6;}
+  header{background:var(--navy); color:var(--white); padding:28px 20px; text-align:center;}
+  header .brand{font-size:13px; letter-spacing:.08em; opacity:.85; text-transform:uppercase;}
+  header h1{margin:8px 0 4px; font-size:26px;}
+  header .sub{font-size:14px; opacity:.9;}
+  nav{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; background:var(--white); padding:14px; border-bottom:1px solid #e3e7ee; position:sticky; top:0; z-index:5;}
+  nav a{text-decoration:none; background:var(--bg); color:var(--navy); padding:8px 14px; border-radius:20px; font-size:13px; font-weight:600; border:1px solid var(--lightblue);}
+  nav a:hover{background:var(--lightblue);}
+  main{max-width:720px; margin:0 auto; padding:10px 18px 60px;}
+  section{background:var(--white); border-radius:14px; padding:26px 22px; margin:28px 0; box-shadow:0 1px 4px rgba(11,46,107,0.08); scroll-margin-top:70px;}
+  section h2{color:var(--navy); margin-top:0; font-size:20px; display:flex; align-items:center; gap:10px;}
+  .badge{display:inline-block; background:var(--teal); color:#fff; font-size:11px; font-weight:700; padding:4px 10px; border-radius:12px; letter-spacing:.04em;}
+  .q{margin:18px 0; padding:14px 16px; background:var(--bg); border-radius:10px;}
+  .q p.prompt{font-weight:600; margin:0 0 10px;}
+  .opt{display:block; width:100%; text-align:left; padding:10px 12px; margin:6px 0; border:1.5px solid var(--lightblue); border-radius:8px; background:#fff; cursor:pointer; font-size:14.5px; color:var(--text);}
+  .opt:hover{background:var(--lightblue);}
+  .opt.correct{background:#dff3ec; border-color:var(--teal); font-weight:600;}
+  .opt.wrong{background:#fde8e8; border-color:#d9534f;}
+  textarea{width:100%; min-height:70px; border:1.5px solid var(--lightblue); border-radius:8px; padding:10px; font-family:inherit; font-size:14.5px; resize:vertical;}
+  .reveal{display:none; margin-top:10px; background:#eef6fa; border-radius:8px; padding:10px 12px; font-size:13.8px; border-left:3px solid var(--teal);}
+  .reveal.show{display:block;}
+  button.reveal-btn{background:none; border:1.5px solid var(--teal); color:var(--teal); padding:7px 14px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer;}
+  button.reveal-btn:hover{background:var(--teal); color:#fff;}
+  .check-btn{background:var(--navy); color:#fff; border:none; padding:11px 20px; border-radius:10px; font-size:14px; font-weight:700; cursor:pointer; margin-top:10px;}
+  .map-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0;}
+  .map-card{background:var(--bg); border-radius:10px; padding:12px; border:1.5px dashed var(--lightblue);}
+  .map-card label{font-size:11px; font-weight:700; color:var(--navy); text-transform:uppercase;}
+  .map-card input{width:100%; border:none; background:transparent; border-bottom:1px solid var(--lightblue); padding:6px 2px; font-size:14px; margin-top:4px;}
+  .kwl{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  footer{text-align:center; color:var(--muted); font-size:12px; padding:20px;}
+  .progress{font-size:12px; color:var(--muted); margin-bottom:6px;}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Fawzia Academy &middot; Chemistry 1 &middot; Chapter 3</div>
+  <h1>Defining the Atom</h1>
+  <div class="sub">Interactive Activities — First Secondary</div>
+</header>
+
+<nav>
+  <a href="#pre">Pre-Assessment</a>
+  <a href="#activity">Individual Activity</a>
+  <a href="#exit">Exit Ticket</a>
+  <a href="#home">Homework / Enrichment</a>
+</nav>
+
+<main>
+
+<section id="pre">
+  <h2><span class="badge">Before Learning</span> What Do We Know?</h2>
+  <p>Answer these 3 quick questions, then fill in the KWL chart below.</p>
+
+  <div class="q" data-q="1">
+    <p class="prompt">1. When a sodium atom becomes a positive ion, it:</p>
+    <button class="opt" data-correct="false">Gains a proton</button>
+    <button class="opt" data-correct="true">Loses an electron</button>
+    <button class="opt" data-correct="false">Gains a neutron</button>
+  </div>
+  <div class="q" data-q="2">
+    <p class="prompt">2. Copper wires conduct electricity well because copper:</p>
+    <button class="opt" data-correct="true">Has electrons that move easily through it</button>
+    <button class="opt" data-correct="false">Has no electrons at all</button>
+    <button class="opt" data-correct="false">Is heavier than other metals</button>
+  </div>
+  <div class="q" data-q="3">
+    <p class="prompt">3. True or False: An atom is a single, solid, unbreakable sphere.</p>
+    <button class="opt" data-correct="false">True</button>
+    <button class="opt" data-correct="true">False — it is made of smaller particles</button>
+  </div>
+
+  <div class="kwl">
+    <div class="map-card">
+      <label>K — What I Know</label>
+      <textarea placeholder="Write what you already know about atoms..."></textarea>
+    </div>
+    <div class="map-card">
+      <label>W — What I Want to Know</label>
+      <textarea placeholder="Write a question you have about atoms..."></textarea>
+    </div>
+  </div>
+</section>
+
+<section id="activity">
+  <h2><span class="badge">During Learning</span> Build Your Atom Concept Map</h2>
+  <p>Fill in each box to summarize what you learned about the atom's structure.</p>
+
+  <div class="map-grid">
+    <div class="map-card"><label>Particle: Electron</label><input placeholder="Charge, mass, location..."></div>
+    <div class="map-card"><label>Particle: Proton</label><input placeholder="Charge, mass, location..."></div>
+    <div class="map-card"><label>Particle: Neutron</label><input placeholder="Charge, mass, location..."></div>
+    <div class="map-card"><label>The Nucleus</label><input placeholder="What is it made of? Where is it?"></div>
+  </div>
+
+  <h2 style="margin-top:32px;"><span class="badge">Achievement Questions</span> Check Your Understanding</h2>
+
+  <div class="q">
+    <p class="prompt">1. Which scientist's experiment led to the discovery of the nucleus?</p>
+    <button class="opt" data-correct="false">J.J. Thomson</button>
+    <button class="opt" data-correct="true">Ernest Rutherford</button>
+    <button class="opt" data-correct="false">James Chadwick</button>
+  </div>
+  <div class="q">
+    <p class="prompt">2. Higher-order thinking: If protons all carry the same (positive) charge and like charges repel, why doesn't the nucleus fly apart?</p>
+    <textarea placeholder="Write your explanation..."></textarea>
+    <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show model answer</button>
+    <div class="reveal">A strong nuclear force between protons and neutrons, acting only at extremely short range inside the nucleus, overcomes the electric repulsion between protons and holds the nucleus together.</div>
+  </div>
+  <div class="q">
+    <p class="prompt">3. Why was Thomson's "plum pudding" model rejected after Rutherford's gold foil experiment?</p>
+    <textarea placeholder="Write your explanation..."></textarea>
+    <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show model answer</button>
+    <div class="reveal">Thomson's model predicted that alpha particles would pass through gold foil with only slight, evenly spread deflection. Instead, most passed straight through (showing the atom is mostly empty space) while a few bounced back sharply (showing a tiny, dense, positively charged nucleus) — evidence Thomson's model could not explain.</div>
+  </div>
+
+  <button class="check-btn" onclick="checkAll()">Check My Answers</button>
+  <p id="score" class="progress"></p>
+</section>
+
+<section id="exit">
+  <h2><span class="badge">Exit Ticket</span> How Did I Do Today?</h2>
+  <div class="q">
+    <p class="prompt">Rate your understanding of today's lesson:</p>
+    <button class="opt" onclick="pick(this)">⭐ I understood it well</button>
+    <button class="opt" onclick="pick(this)">✅ I understood most of it</button>
+    <button class="opt" onclick="pick(this)">❓ I need more help</button>
+  </div>
+  <div class="q">
+    <p class="prompt">In one sentence, what is an atom made of?</p>
+    <textarea placeholder="Write your answer..."></textarea>
+  </div>
+</section>
+
+<section id="home">
+  <h2><span class="badge">Homework / Enrichment</span> Going Further</h2>
+  <p>These three topics extend today's lesson — read each short section and answer the question.</p>
+
+  <div class="q">
+    <p class="prompt">1. Millikan's Oil-Drop Experiment (1910)</p>
+    <p>Robert Millikan sprayed oil droplets between two charged plates and adjusted the electric field strength until a droplet's fall was balanced. By measuring the charge on many droplets, he found they were always a whole-number multiple of one value: 1.602 × 10⁻¹⁹ coulombs — the charge of a single electron.</p>
+    <p class="prompt">Question: Why was it significant that every droplet's charge was a multiple of the same number?</p>
+    <textarea placeholder="Write your answer..."></textarea>
+  </div>
+
+  <div class="q">
+    <p class="prompt">2. The Historical Timeline of the Atomic Model</p>
+    <p>From 1897 (discovery of the electron) to 1932 (discovery of the neutron) to 2007 (CERN's studies of subatomic particles), our model of the atom has been continually revised as new evidence appeared.</p>
+    <p class="prompt">Question: Why is it normal in science for a model (like Thomson's) to be replaced by a better one, rather than a sign that the earlier scientists failed?</p>
+    <textarea placeholder="Write your answer..."></textarea>
+  </div>
+
+  <div class="q">
+    <p class="prompt">3. Seeing Atoms: The Scanning Tunneling Microscope (STM)</p>
+    <p>An STM image of graphite shows carbon atoms arranged in a repeating hexagonal pattern, each atom appearing as a bright spot a fraction of a nanometer apart from its neighbors.</p>
+    <p class="prompt">Question: What do the bright spots in an STM image represent, and why are they evenly spaced?</p>
+    <textarea placeholder="Write your answer..."></textarea>
+  </div>
+</section>
+
+</main>
+<footer>Fawzia Academy &middot; Defining the Atom &middot; For classroom use only</footer>
+
+<script>
+function pick(btn){
+  const group = btn.parentElement.querySelectorAll('.opt');
+  group.forEach(b=>b.style.background='#fff');
+  btn.style.background='var(--lightblue)';
+}
+document.querySelectorAll('.q[data-q] .opt, #activity .q .opt').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const group = btn.parentElement.querySelectorAll('.opt');
+    group.forEach(b=>b.classList.remove('correct','wrong'));
+    if(btn.dataset.correct==='true'){ btn.classList.add('correct'); }
+    else { btn.classList.add('wrong'); }
+  });
+});
+function checkAll(){
+  const qs = document.querySelectorAll('#activity .q[data-correct], #activity .q .opt');
+  document.getElementById('score').textContent = 'Answers checked — review the highlighted responses above.';
+}
+</script>
+</body>
+</html>
