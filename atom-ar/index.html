@@ -1,12 +1,125 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>تعريف الذرة | المصادر الرقمية</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;800&display=swap" rel="stylesheet">
-<style>body{margin:0;font-family:'Tajawal',sans-serif;background:#E3F6F4;color:#1A2433}header{background:#116483;color:#fff;text-align:center;padding:26px 16px}h1{margin:0;font-size:26px}
-main{max-width:640px;margin:0 auto;padding:18px;display:grid;gap:12px}a{display:block;background:#fff;border-radius:14px;padding:18px;text-decoration:none;color:#116483;font-weight:800;font-size:18px;box-shadow:0 3px 12px rgba(20,60,70,.08)}
-a span{display:block;font-weight:500;font-size:14px;color:#4f6a75;margin-top:4px}footer{text-align:center;color:#5d7882;font-size:13px;padding:20px}</style></head>
-<body><header><h1>تعريف الذرة</h1><div>الكيمياء (1) · الدرس 3-2</div></header><main>
-<a href="check.html?tab=0">📝 التقويم القبلي<span>قبل الدرس</span></a>
-<a href="ar/">🧬 نموذج الذرة بالواقع المعزز<span>نموذج ثلاثي الأبعاد على الطاولة</span></a>
-<a href="worksheet.html">🏆 تحدّي بناء الذرة<span>ورقة العمل التفاعلية الفردية</span></a>
-<a href="check.html?tab=1">🎫 بطاقة الخروج<span>في نهاية الدرس</span></a>
-<a href="homework.html">🏠 واجب منزلي / تعزيز<span>مواصلة الاستكشاف</span></a>
-</main><footer>أكاديمية فوزية · fawzia-academy.vercel.app</footer></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الواقع المعزز | نموذج الذرة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script type="module" src="../js/model-viewer.min.js"></script>
+<style>
+  :root{
+    --teal:#30A99D; --teal-soft:#E3F6F4; --navy:#116483; --ink:#1A2433;
+    --red:#0C5866; --gold:#e0a43a; --card:#ffffff; --line:rgba(22,50,63,.12);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Tajawal',sans-serif;background:var(--teal-soft);color:var(--ink);-webkit-font-smoothing:antialiased}
+  header{background:var(--navy);color:#fff;padding:18px 18px 22px;text-align:center}
+  header .eyebrow{font-size:13px;opacity:.8}
+  header h1{margin:6px 0 4px;font-size:clamp(22px,5vw,32px);font-weight:800}
+  header p{margin:0;font-size:15px;opacity:.9}
+  main{max-width:860px;margin:0 auto;padding:16px}
+  .viewer-card{background:var(--card);border-radius:20px;box-shadow:0 6px 20px rgba(20,60,70,.12);overflow:hidden;position:relative}
+  model-viewer{width:100%;height:min(62vh,520px);background:radial-gradient(circle at 50% 40%,#ffffff 0%,#dff3f1 100%);--poster-color:transparent}
+  .ar-btn{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;border:none;
+    border-radius:999px;padding:12px 22px;font-family:inherit;font-size:16px;font-weight:700;box-shadow:0 6px 16px rgba(15,124,124,.35);cursor:pointer;white-space:nowrap}
+  .controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:14px}
+  .controls button{border:2px solid var(--navy);background:#fff;color:var(--navy);border-radius:12px;padding:10px 16px;
+    font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  .controls button.active{background:var(--navy);color:#fff}
+  .legend{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:0 14px 16px;font-size:14.5px}
+  .dot{display:inline-block;width:16px;height:16px;border-radius:50%;vertical-align:middle;margin-inline-end:6px}
+  .status{text-align:center;font-size:14px;color:#4f6a75;padding:0 14px 14px;min-height:20px}
+  h2{font-size:20px;margin:26px 4px 12px;color:var(--navy)}
+  .task{background:var(--card);border-radius:16px;padding:16px 18px;margin-bottom:12px;border:1px solid var(--line)}
+  .tag{display:inline-block;font-size:12.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:8px;padding:3px 10px;margin-bottom:8px}
+  .tag.hot{background:var(--red)}
+  .task p{margin:0 0 10px;font-size:16px;line-height:1.7;font-weight:500}
+  textarea{width:100%;min-height:64px;border:1.5px solid var(--line);border-radius:10px;padding:10px;font-family:inherit;font-size:15px}
+  .reveal{margin-top:8px;background:none;border:1.5px solid var(--navy);color:var(--navy);border-radius:9px;padding:7px 14px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer}
+  .answer{display:none;margin-top:10px;background:var(--teal-soft);border-radius:10px;padding:10px 12px;font-size:15px;line-height:1.7}
+  .answer.show{display:block}
+  .tip{background:#fff7e6;border:1px solid #f3d9a4;border-radius:12px;padding:12px 14px;font-size:14.5px;line-height:1.7;margin-top:14px}
+  footer{text-align:center;color:#5d7882;font-size:13px;padding:26px 16px 40px}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">الكيمياء (1) · الفصل الثالث · الدرس الثاني</div>
+  <h1>نموذج الذرة بالواقع المعزز</h1>
+  <p>النواة وسحابة الإلكترونات… وتجربة رذرفورد حيّة أمامك</p>
+</header>
+
+<main>
+  <div class="viewer-card">
+    <model-viewer id="mv" src="atom-model.glb" alt="نموذج الذرة: نواة من البروتونات والنيوترونات يحيط بها إلكترونات، مع محاكاة تجربة رذرفورد لجسيمات ألفا"
+      ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" camera-controls touch-action="pan-y"
+      auto-rotate rotation-per-second="10deg" animation-name="electrons" autoplay shadow-intensity="0.8"
+      camera-orbit="30deg 75deg auto" exposure="1.05">
+      <button slot="ar-button" class="ar-btn">📱 عرض النموذج على الطاولة (AR)</button>
+    </model-viewer>
+    <div class="controls">
+      <button id="b-e" class="active" onclick="play('electrons')">⚡ حركة الإلكترونات</button>
+      <button id="b-r" onclick="play('rutherford')">☢️ تجربة رذرفورد</button>
+    </div>
+    <div class="tip" id="arnote" style="display:none;margin:0 14px 12px">📱 زر الواقع المعزز لا يظهر على هذا الجهاز أو المتصفح. للعرض على الطاولة: افتح الرابط في <b>Safari</b> على الآيباد/الآيفون، أو في <b>Chrome</b> على جوال أندرويد (وليس من داخل واتساب أو تيليجرام أو على الحاسوب). النموذج ثلاثي الأبعاد يعمل هنا بشكل طبيعي.</div>
+    <div class="status" id="status">يمكن تدوير النموذج بالإصبع، وتكبيره بإصبعين.</div>
+    <div class="legend">
+      <span><span class="dot" style="background:#dc4a4a"></span>بروتونات (+)</span>
+      <span><span class="dot" style="background:#bfc3c7"></span>نيوترونات (متعادلة)</span>
+      <span><span class="dot" style="background:#2f6fe4"></span>إلكترونات (−)</span>
+      <span><span class="dot" style="background:#e0a43a"></span>جسيمات ألفا (تجربة رذرفورد)</span>
+    </div>
+  </div>
+
+  <h2>مهام الاستكشاف</h2>
+
+  <div class="task">
+    <span class="tag">ملاحظة</span>
+    <p>١. بعد الضغط على «حركة الإلكترونات»: أين تتركز كتلة الذرة تقريبًا؟ وأين توجد الإلكترونات بالنسبة للنواة؟</p>
+    <textarea placeholder="الملاحظة..."></textarea>
+    <button class="reveal" onclick="rev(this)">عرض الإجابة</button>
+    <div class="answer">تتركز كتلة الذرة تقريبًا كاملة في النواة الصغيرة الكثيفة في المركز (البروتونات والنيوترونات)، بينما تتحرك الإلكترونات خفيفة الوزن حول النواة في فراغ شاسع نسبيًا مقارنة بحجم النواة.</div>
+  </div>
+
+  <div class="task">
+    <span class="tag hot">تحليل · مهارة تفكير عليا</span>
+    <p>٢. بعد الضغط على «تجربة رذرفورد»: ماذا حدث لمعظم جسيمات ألفا؟ وماذا حدث للجسيم الذي اقترب جدًا من النواة؟</p>
+    <textarea placeholder="التحليل..."></textarea>
+    <button class="reveal" onclick="rev(this)">عرض الإجابة</button>
+    <div class="answer">نفذت معظم جسيمات ألفا مباشرة دون أي انحراف تقريبًا، لأن معظم حجم الذرة فراغ. أما الجسيم الذي اقترب جدًا من النواة الموجبة الصغيرة فقد تنافر معها بشدة (شحنتان موجبتان) فانحرف بزاوية كبيرة، وأحد الجسيمات النادرة الذي اتجه مباشرة نحو النواة ارتد تقريبًا إلى الخلف.</div>
+  </div>
+
+  <div class="task">
+    <span class="tag hot">توقّع وتفسير · مهارة تفكير عليا</span>
+    <p>٣. لو كانت الذرة بالفعل "كرة موجبة منتظمة" كما افترض نموذج طومسون، فكيف كانت ستبدو نتيجة تجربة رذرفورد المتوقعة؟ ولماذا تختلف عمّا شاهدته في النموذج؟</p>
+    <textarea placeholder="التوقع والتفسير..."></textarea>
+    <button class="reveal" onclick="rev(this)">عرض الإجابة</button>
+    <div class="answer">لو كانت الشحنة الموجبة منتشرة بانتظام في الذرة كلها (نموذج طومسون)، لكانت جميع جسيمات ألفا قد انحرفت بزوايا صغيرة ومتقاربة فقط، دون أي ارتداد حاد. لكن النتيجة الفعلية (نفوذ معظمها دون انحراف، وارتداد نادر لبعضها بزاوية كبيرة جدًا) أظهرت أن الشحنة الموجبة والكتلة متركزتان في نواة صغيرة جدًا وكثيفة، وهذا ما دفع رذرفورد لرفض نموذج طومسون واقتراح نموذج النواة.</div>
+  </div>
+
+  <div class="tip">💡 <b>ملاحظة للمعلم/ة:</b> إن لم يدعم الجهاز الواقع المعزز، يظل النموذج ثلاثي الأبعاد يعمل على الشاشة، ويمكن عرضه من جهاز المعلم على جهاز العرض.</div>
+</main>
+
+<footer>أكاديمية فوزية · fawzia-academy.vercel.app</footer>
+
+<script>
+const mv=document.getElementById('mv');
+function play(name){
+  mv.animationName=name; mv.currentTime=0; mv.play();
+  document.getElementById('b-e').classList.toggle('active',name==='electrons');
+  document.getElementById('b-r').classList.toggle('active',name==='rutherford');
+  document.getElementById('status').textContent = name==='rutherford'
+    ? 'لاحظ: معظم الجسيمات تنفذ مباشرة، وقلة قليلة فقط تنحرف أو ترتد.'
+    : 'تتحرك الإلكترونات حول النواة الصغيرة الكثيفة في فراغ شاسع نسبيًا.';
+}
+function rev(b){ b.nextElementSibling.classList.toggle('show'); }
+mv.addEventListener('load',()=>{
+  setTimeout(()=>{
+    if(!mv.canActivateAR){
+      const n=document.getElementById('arnote'); n.style.display='block';
+    }
+  },600);
+});
+</script>
+</body>
+</html>
